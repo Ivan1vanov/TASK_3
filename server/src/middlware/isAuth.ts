@@ -7,7 +7,7 @@ export const isAuth = async (req: any, res: Response, next: NextFunction) => {
 
         const token = req.headers.authorization.split(' ')[1]
         if(token) {
-            const decodedData: any = jwt.verify(token, 'sdf')
+            const decodedData: any = jwt.verify(token, config.get<string>('jwtConfig'))
 
             req.userId = decodedData.id
 
