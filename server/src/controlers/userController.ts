@@ -15,7 +15,7 @@ class UserControllers {
                 const userData = req.body
         
                 try {
-                    if(!userData.name && !userData.password) {
+                    if(!userData.name || !userData.password) {
                         res.status(500).send({
                             message: 'Invalid credentials'
                         })
