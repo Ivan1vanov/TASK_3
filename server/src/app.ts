@@ -19,7 +19,7 @@ app.get('/', (req: Request, res: Response) => {
     res.send('hello')
 })
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || config.get<number>('port')
 mongoose.connect(config.get('dbUrl')).then(() => {
     app.listen(PORT, () => console.log(`server on http://localhost:${PORT}`))
     routes(app)
