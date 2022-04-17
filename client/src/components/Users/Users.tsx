@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import UserTable from '../UserTable/UserTable'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsersAction, changeUserStatusAction, activeAllusersAction, blockAllUsersAction } from '../../store/action/userActions';
+import { getAllUsersAction, changeUserStatusAction, activeAllusersAction, blockAllUsersAction, deleteUserAction } from '../../store/action/userActions';
 import { IUser } from '../../store/types/user.types';
 import { Button } from 'react-bootstrap';
 import styles from './users.module.scss'
 import { createUnparsedSourceFile } from 'typescript';
 import { useNavigate } from 'react-router-dom';
+
+import { AiFillDelete } from "react-icons/ai";
+import { AiFillApi } from "react-icons/ai";
+
 
 const Users = () => {
     const dispatch = useDispatch()
@@ -68,6 +72,13 @@ const Users = () => {
         }
       };
 
+      const deleteUserHandler = (e: React.MouseEvent<HTMLElement>) => {
+        e.preventDefault()
+        categoryIds?.map((userId: string, index: number) => {
+            dispatch(deleteUserAction(userId, navigate))
+        })
+    }
+
   return (
       <div>
           <div className={styles.actionContainer}>
@@ -81,22 +92,28 @@ const Users = () => {
       
             {categoryIds.length > 0 && (
                 <>
-                
                 <div className={styles.actionButtonAll}>
                 <Button 
-                variant="light"
+                variant="success"
                 onClick={activeSelectedUsers}>
-                ACTIVE ALL
+                ACTIVE
             </Button> 
             </div>
 
             <div className={styles.actionButtonAll}>
                 <Button 
-                variant="light"
+                variant='danger'
                 onClick={blockeSelectedUsers}>
-                BLOCK ALL
+                BLOCK <AiFillApi/>
             </Button> 
             </div>
+
+            <div className={styles.actionButtonAll}>
+      <Button variant='danger' onClick={deleteUserHandler}>
+          DELETE <AiFillDelete/>
+          </Button>
+          
+         </div>
 
             </>
             )}
@@ -115,7 +132,6 @@ const Users = () => {
       <th scope="col">Email</th>
       <th scope="col">Last Login</th>
       <th scope="col">Status</th>
-      <th scope="col">Action</th>
     </tr>
 
   </thead>
