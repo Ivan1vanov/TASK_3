@@ -131,18 +131,20 @@ class UserControllers {
                     res.status(500).send({
                         message: 'User has been blocked'
                     })
+                } else {
+                    const changStatus = await User.findById(id)
+                    // const user = await User.findByIdAndUpdate(id, {blocked: true})
+                    changStatus.set({
+                        blocked: false
+                    })
+                    await changStatus.save()
+        
+                    res.send({
+                        user: changStatus,
+                        message: 'You have been blocked so You do not have an acces to Admin Dashboars'})
                 }
 
-                const changStatus = await User.findById(id)
-                // const user = await User.findByIdAndUpdate(id, {blocked: true})
-                changStatus.set({
-                    blocked: false
-                })
-                await changStatus.save()
-    
-                res.send({
-                    user: changStatus,
-                    message: 'User has been bloked'})
+                
     
             } catch (error) {
                 
@@ -156,19 +158,21 @@ class UserControllers {
                 const isUserBlocked = await User.findById(req.userId)
                 if(isUserBlocked.blocked === true) {
                     res.status(500).send({
-                        message: 'User has been blocked'
+                        message: 'You have been blocked so You do not have an acces to Admin Dashboars'
                     })
+                } else {
+                    const changStatus = await User.findById(id)
+                    // const user = await User.findByIdAndUpdate(id, {blocked: true})
+                    changStatus.set({
+                        blocked: true
+                    })
+                    await changStatus.save()
+        
+                    res.send({
+                        user: changStatus,
+                        message: 'User has been bloked'})
                 }
-                const changStatus = await User.findById(id)
-                // const user = await User.findByIdAndUpdate(id, {blocked: true})
-                changStatus.set({
-                    blocked: true
-                })
-                await changStatus.save()
-    
-                res.send({
-                    user: changStatus,
-                    message: 'User has been bloked'})
+               
     
             } catch (error) {
                 
@@ -193,7 +197,7 @@ class UserControllers {
                 const isUserBlocked = await User.findById(req.userId)
                 if(isUserBlocked.blocked === true) {
                     res.status(500).send({
-                        message: 'User has been blocked'
+                        message: 'You have been blocked so You do not have an acces to Admin Dashboars'
                     })
                 } else {
                     const deletedUser = await User.findByIdAndDelete(id)

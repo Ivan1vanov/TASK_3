@@ -9,4 +9,5 @@ const reducer = combineReducers({
     users: userReducer
 })
 
-export const store = createStore(reducer, applyMiddleware(compose(thunk)))
+
+export const store = createStore(reducer, compose(applyMiddleware(thunk)))
