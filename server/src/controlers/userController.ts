@@ -95,32 +95,7 @@ class UserControllers {
                 }
         }
 
-        async blockUser(req: Request | any, res: Response) {
-            const {id} = req.params
-            try {
-                
-                const isUserBlocked = await User.findById(req.userId)
-                if(isUserBlocked.blocked === true) {
-                    res.status(500).send({
-                        message: 'User has been blocked'
-                    })
-                }
-
-                const changStatus = await User.findById(id)
-                // const user = await User.findByIdAndUpdate(id, {blocked: true})
-                changStatus.set({
-                    blocked: !changStatus.blocked
-                })
-                await changStatus.save()
-    
-                res.send({
-                    user: changStatus,
-                    message: 'User has been bloked'})
-    
-            } catch (error) {
-                
-            }
-        }
+       
         async activeUser(req: Request | any, res: Response) {
             const {id} = req.params
 
