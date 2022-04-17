@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken'
 
 const jwtTokenGenerator = (id: mongoose.ObjectId, email: string, name: string):string => {
-    return jwt.sign({id, email, name}, 'sdf', {expiresIn: '24h'})
+    return jwt.sign({id, email, name}, config.get<string>('jwtConfig'), {expiresIn: '24h'})
 }
 
 
