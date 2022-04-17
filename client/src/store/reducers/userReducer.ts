@@ -23,7 +23,6 @@ export const userReducer = (state = initializeState, action: TypeAction) => {
             return state
 
             case UserActionTypes.GET_USERS: 
-            console.log(action.payload)
             return {users: action.payload}
 
             case UserActionTypes.CHANGE_STATUS:
@@ -35,6 +34,12 @@ export const userReducer = (state = initializeState, action: TypeAction) => {
             case UserActionTypes.USER_HAS_BEEN_BLOCKED: 
             return {
                 error: action.payload
+            }
+
+            case UserActionTypes.DELETE_USER: 
+            return {
+                ...state,
+                users: state.users.filter((user: IUser) => user._id !== action.payload?._id)
             }
 
             default: 

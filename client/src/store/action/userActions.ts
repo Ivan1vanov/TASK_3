@@ -51,7 +51,6 @@ export const changeUserStatusAction = (id: string, navigate: any) => async (disp
             dispatch({type: UserActionTypes.LOGOUT})
             navigate('/auth')
             dispatch({type: UserActionTypes.USER_HAS_BEEN_BLOCKED, payload: err.response.data.message})
-            // console.log(err.response.data.message)
         }
     }
 }
@@ -68,7 +67,6 @@ export const activeAllusersAction = (id: string, navigate: any) => async (dispat
             dispatch({type: UserActionTypes.LOGOUT})
             navigate('/auth')
             dispatch({type: UserActionTypes.USER_HAS_BEEN_BLOCKED, payload: err.response.data.message})
-            // console.log(err.response.data.message)
         }
     }
 }
@@ -83,7 +81,20 @@ export const blockAllUsersAction = (id: string, navigate: any) => async (dispatc
             dispatch({type: UserActionTypes.LOGOUT})
             navigate('/auth')
             dispatch({type: UserActionTypes.USER_HAS_BEEN_BLOCKED, payload: err.response.data.message})
-            // console.log(err.response.data.message)
+        }
+    }
+}
+
+export const deleteUserAction = (id: string, navigate: any) => async (dispatch: Dispatch) => {
+    try {
+        const {data} = await api.deleteUserAPI(id)
+        dispatch({type: UserActionTypes.DELETE_USER, payload: data.user})
+    } catch (error) {
+        const err = error as AxiosError 
+        if (err.response) {
+            dispatch({type: UserActionTypes.LOGOUT})
+            navigate('/auth')
+            dispatch({type: UserActionTypes.USER_HAS_BEEN_BLOCKED, payload: err.response.data.message})
         }
     }
 }

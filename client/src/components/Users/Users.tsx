@@ -45,15 +45,12 @@ const Users = () => {
 	};
 
     const blockeSelectedUsers = (e: React.MouseEvent<HTMLElement>) => {
-        console.log(categoryIds)
         categoryIds?.map((userId: string, index: number) => {
             dispatch(blockAllUsersAction(userId, navigate))
         })
     }
 
     const activeSelectedUsers = (e: React.MouseEvent<HTMLElement>) => {
-      
-        console.log(categoryIds)
             categoryIds?.map((userId: string, index: number) => {
                 dispatch(activeAllusersAction(userId, navigate))
             })
@@ -70,7 +67,6 @@ const Users = () => {
             setCategoryIds([])
         }
       };
-console.log(categoryIds)
 
   return (
       <div>
@@ -147,7 +143,6 @@ console.log(categoryIds)
 </table>
 
     </div>
-    <Button>More</Button>
     </div>
 
     </div>

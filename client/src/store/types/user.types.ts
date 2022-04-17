@@ -12,7 +12,8 @@ export enum UserActionTypes {
     LOGOUT='LOGOUT',
     GET_USERS='GET_USERS',
     CHANGE_STATUS='CHANGE_STATUS',
-    USER_HAS_BEEN_BLOCKED='USER_HAS_BEEN_BLOCKED'
+    USER_HAS_BEEN_BLOCKED='USER_HAS_BEEN_BLOCKED',
+    DELETE_USER='DELETE_USER'
 }
 
 export interface IUser {
@@ -67,6 +68,11 @@ export interface UserHasBennBlocked {
     type: UserActionTypes.USER_HAS_BEEN_BLOCKED,
     payload?: string
 }
+
+export interface DeleteUser {
+    type: UserActionTypes.DELETE_USER,
+    payload?: IUser
+}
 //////////////////////////////
 
 
@@ -78,4 +84,4 @@ export interface UserState {
 
 
 
-export type TypeAction = RegisterUser | LoginUser | SomeError | LogoutUser | FetchUsers | ChangeUserStatus | UserHasBennBlocked
+export type TypeAction = RegisterUser | LoginUser | SomeError | LogoutUser | FetchUsers | ChangeUserStatus | UserHasBennBlocked | DeleteUser

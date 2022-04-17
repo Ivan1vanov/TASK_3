@@ -16,9 +16,8 @@ API.interceptors.request.use((req: any) => {
 
 export const registerUserAPI = (data: UserInputData) => API.post('/api/user/registration', data)
 export const loginUserAPI = (data: UserInputData) => API.post('api/user/login', data)
-export const getAllUserAPI = () => API.get(`http://localhost:5000/api/user`)
+export const getAllUserAPI = () => API.get(`/api/user`)
 export const changeUserStatusAPI = (id: string) => API.put(`/api/user/${id}`)
 export const freeAllUsersAPI = (id: string) => API.put(`/api/user/active/${id}`)
 export const blockAllUsersAPI = (id: string) => API.put(`/api/user/block/${id}`)
-///api/user/block/:id
-///api/user/active/:id
+export const deleteUserAPI = (id: string) => API.delete(`/api/user/delete/${id}`)

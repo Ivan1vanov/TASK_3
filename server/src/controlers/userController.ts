@@ -57,7 +57,7 @@ class UserControllers {
         
                     if(user) {
 
-                        if(user.blocked) {
+                        if(user.blocked === true) {
                             res.status(500).send({
                                 message: 'User has been blocked'
                             })
@@ -100,7 +100,7 @@ class UserControllers {
             try {
                 
                 const isUserBlocked = await User.findById(req.userId)
-                if(isUserBlocked.blocked) {
+                if(isUserBlocked.blocked === true) {
                     res.status(500).send({
                         message: 'User has been blocked'
                     })
@@ -127,12 +127,12 @@ class UserControllers {
             try {
 
                 const isUserBlocked = await User.findById(req.userId)
-                if(isUserBlocked.blocked) {
+                if(isUserBlocked.blocked === true) {
                     res.status(500).send({
                         message: 'User has been blocked'
                     })
                 }
-                
+
                 const changStatus = await User.findById(id)
                 // const user = await User.findByIdAndUpdate(id, {blocked: true})
                 changStatus.set({
@@ -154,7 +154,7 @@ class UserControllers {
             try {
 
                 const isUserBlocked = await User.findById(req.userId)
-                if(isUserBlocked.blocked) {
+                if(isUserBlocked.blocked === true) {
                     res.status(500).send({
                         message: 'User has been blocked'
                     })
@@ -183,6 +183,28 @@ class UserControllers {
                 res.send({users})
             } catch (error) {
                 console.log(error)
+            }
+        }
+
+        async deleteUser(req: Request | any, res: Response) {
+            const {id} = req.params
+            try {
+
+                const isUserBlocked = await User.findById(req.userId)
+                if(isUserBlocked.blocked === true) {
+                    res.status(500).send({
+                        message: 'User has been blocked'
+                    })
+                } else {
+                    const deletedUser = await User.findByIdAndDelete(id)
+                    res.send({
+                        user: deletedUser,
+                        message: 'User has been bloked'})
+                }
+                
+    
+            } catch (error) {
+                
             }
         }
 }
