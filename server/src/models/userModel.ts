@@ -5,10 +5,10 @@ export interface UserDataInput {
     name: string,
     email: string,
     password: string,
-    lastSeanse: Date,
 }
 
 export interface UserInterface extends UserDataInput, mongoose.Document {
+    lastSeanse: Date,
     blocked: boolean,
     _id: mongoose.ObjectId,
     createdAt: Date,
